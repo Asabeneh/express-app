@@ -14,6 +14,7 @@ const app = express()
 // PUT: UPDATING
 // DELETE: DELETING
 
+app.set('view engine', 'ejs')
 // Middle ware
 app.use((req, res, next) => {
   const user = os.hostname
@@ -73,8 +74,7 @@ let students = [
 ]
 
 app.get('/', (req, res) => {
-  let pathname = __dirname + '/views/index.html'
-  res.sendFile(pathname)
+  res.render('index')
 })
 app.get('/about', (req, res) => {
   let pathname = __dirname + '/views/about.html'
@@ -85,13 +85,24 @@ app.get('/contact', (req, res) => {
   let pathname = __dirname + '/views/contact.html'
   res.sendFile(pathname)
 })
+
 app.get('/text', (req, res) => {
   res.send('SOME TEXT')
 })
 app.get('/students', (req, res) => {
+  const student = {
+    name: 'Asabeneh',
+    age: 250,
+    country: 'Finland',
+    skills:['HTML', 'CSS','JS']
+  }
+
+  res.render('students', { students })
+})
+app.get('/students/api', (req, res) => {
   res.send(students)
 })
-app.get('/students/:id', (req, res) => {
+app.get('/students/api/:id', (req, res) => {
   const id = req.params.id
   const student = students.find(
     st => st._id == id || st.firstName.toLowerCase() == id.toLowerCase()
