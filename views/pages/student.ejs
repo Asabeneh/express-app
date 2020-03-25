@@ -1,0 +1,31 @@
+<%- include('../partials/head') %>
+
+<body>
+    <%- include('../partials/navbar') %>
+    <main>
+        <h1>Student</h1>
+        <% if(student){ %>
+        <h2>
+            <%= student.firstName %>
+            <%= student.lastName %>
+        </h2>
+        <p>
+            <%= student.age %>
+        </p>
+        <p>
+            <%= student.country %>
+        </p>
+        <p>
+            <%= student.skills %>
+        </p>
+        <div>
+            <a href="/student/edit/<%= student._id %>">Edit</a>
+            <a href="/api/v.1.0/students/<%= student._id %>/delete">Delete</a>
+        </div>
+
+        <% } %>
+
+    </main>
+</body>
+
+</html>

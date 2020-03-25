@@ -14,6 +14,8 @@ const app = express()
 // PUT: UPDATING
 // DELETE: DELETING
 
+// We are setting our view engine, ejs
+
 app.set('view engine', 'ejs')
 // Middle ware
 app.use((req, res, next) => {
@@ -26,6 +28,7 @@ app.use((req, res, next) => {
 
     console.log('content has been saved')
   })
+  // must thing to do
   next()
 })
 
@@ -73,35 +76,61 @@ let students = [
   }
 ]
 
+// the home route
+
 app.get('/', (req, res) => {
-  res.render('index')
+  res.render('pages/index')
 })
+
+// the about route
 app.get('/about', (req, res) => {
-  let pathname = __dirname + '/views/about.html'
-  res.sendFile(pathname)
+  res.render('pages/about')
 })
 
+// the contact route
 app.get('/contact', (req, res) => {
-  let pathname = __dirname + '/views/contact.html'
-  res.sendFile(pathname)
+  res.render('pages/contact')
 })
 
-app.get('/text', (req, res) => {
-  res.send('SOME TEXT')
-})
+// all students route, show route or the UI
 app.get('/students', (req, res) => {
   const student = {
     name: 'Asabeneh',
     age: 250,
     country: 'Finland',
-    skills:['HTML', 'CSS','JS']
+    skills: ['HTML', 'CSS', 'JS']
   }
 
-  res.render('students', { students })
+  res.render('pages/students', { students })
 })
-app.get('/students/api', (req, res) => {
+
+// route for a signle student, show route or UI
+app.get('/students/:id', (req, res) => {
+  const id = req.params.id
+  const student = students.find(st => st._id == id)
+  res.render('pages/student', { student })
+})
+
+// A form route to add student, show or UI
+app.get('/student/add', (req, res) => {
+  res.render('pages/add-student')
+})
+
+// An edit for to update student data, show or UI
+app.get('/student/edit/:id', (req, res) => {
+  const id = req.params.id
+  const student = students.find(st => st._id == id)
+  console.log(student)
+
+  res.render('pages/edit-student', { student })
+})
+
+// GET all students, an API or JSON
+app.get('/api/v1.0.0/students', (req, res) => {
   res.send(students)
 })
+
+// GET a single student, an object
 app.get('/students/api/:id', (req, res) => {
   const id = req.params.id
   const student = students.find(
@@ -115,14 +144,18 @@ app.get('/students/api/:id', (req, res) => {
   }
 })
 
-app.post('/students', (req, res) => {
+// adding student route, api
+app.post('/api/v.1.0/students', (req, res) => {
+  console.log(req.body)
   const id = students.length + 1
+  req.body.skills = req.body.skills.split(',')
   req.body._id = id
   students.push(req.body)
-  res.send('A data has been created')
+  res.redirect('/students')
 })
 
-app.put('/students/:id', (req, res) => {
+// edit path or route, api
+app.post('/api/v.1.0/students/:id/edit', (req, res) => {
   const id = +req.params.id
   students = students.map(st => {
     if (st._id == id) {
@@ -131,16 +164,19 @@ app.put('/students/:id', (req, res) => {
     }
     return st
   })
-  res.send('A student data has been updated')
+  res.redirect('/students')
 })
 
-app.delete('/students/:id', (req, res) => {
+// route to delete
+app.get('/api/v.1.0/students/:id/delete', (req, res) => {
   const id = req.params.id
   students = students.filter(st => st._id != id)
-
-  res.send('A student has been deleted')
+  res.redirect('/students')
 })
 
+// listen port
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}...`)
 })
+
+

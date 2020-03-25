@@ -1,0 +1,40 @@
+<%- include('../partials/head') %>
+
+<body>
+    <%- include('../partials/navbar') %>
+    <main>
+        <h1>Students</h1>
+
+        <div>
+
+            <% students.map(function(student){ %>
+
+            <div>
+                <a href="/students/<%= student._id %>">
+                    <h2>
+                        <%= student.firstName %>
+                        <%= student.lastName %>
+                    </h2>
+                    <p>
+                        <%= student.age %>
+                    </p>
+                    <p>
+                        <%= student.country %>
+                    </p>
+                    <p>
+                        <%= student.skills %>
+                    </p>
+                </a>
+
+            </div>
+
+
+            <% }) %>
+
+        </div>
+
+    </main>
+
+</body>
+
+</html>
