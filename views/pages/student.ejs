@@ -3,28 +3,33 @@
 <body>
     <%- include('../partials/navbar') %>
     <main>
-        <h1>Student</h1>
-        <% if(student){ %>
-        <h2>
-            <%= student.firstName %>
-            <%= student.lastName %>
-        </h2>
-        <p>
-            <%= student.age %>
-        </p>
-        <p>
-            <%= student.country %>
-        </p>
-        <p>
-            <%= student.skills %>
-        </p>
-        <div>
-            <a href="/student/edit/<%= student._id %>">Edit</a>
-            <a href="/api/v.1.0/students/<%= student._id %>/delete">Delete</a>
+        <div class="main-wrapper">
+            <h1>Student</h1>
+            <% if(student){ %>
+            <h2>
+                <%= student.firstName %>
+                <%= student.lastName %>
+            </h2>
+            <p>
+                <%= student.age %>
+            </p>
+            <p>
+                <%= student.country %>
+            </p>
+            <p>
+                <%= student.skills.join(', ') %>
+            </p>
+            <p class="bio">
+                <%= student.bio %>
+            </p>
+            <div>
+                <a class="btn" href="/student/edit/<%= student._id %>">Edit</a>
+                <a class="btn" href="/api/v.1.0/students/<%= student._id %>/delete">Delete</a>
+            </div>
+
+            <% } %>
+
         </div>
-
-        <% } %>
-
     </main>
 </body>
 

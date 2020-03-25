@@ -3,13 +3,11 @@
 <body>
     <%- include('../partials/navbar') %>
     <main>
-        <h1>Students</h1>
-
-        <div>
-
+        <h3 class="page-title">Students list</h3>
+        <p>There are <%= students.length %> student in the list.</p>
+        <div class="students">
             <% students.map(function(student){ %>
-
-            <div>
+            <div class="student">
                 <a href="/students/<%= student._id %>">
                     <h2>
                         <%= student.firstName %>
@@ -22,19 +20,14 @@
                         <%= student.country %>
                     </p>
                     <p>
-                        <%= student.skills %>
+                        <%= student.skills.join(', ') %>
                     </p>
                 </a>
-
             </div>
-
-
+            <hr />
             <% }) %>
-
         </div>
-
     </main>
-
 </body>
 
 </html>
