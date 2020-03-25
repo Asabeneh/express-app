@@ -7,6 +7,7 @@ const bodyParser = require('body-parser')
 const { showDateTime } = require('./my_modules/my_modules.js')
 const Student = require('./models/Student')
 const PORT = process.env.PORT || 5000
+const Router = require('./routes/routes')
 
 const app = express()
 
@@ -24,7 +25,7 @@ mongoose.connect(
   { useNewUrlParser: true, useUnifiedTopology: true },
   err => {
     if (err) return console.log(err)
-    console.log('The server is connnected to MongoDB database')
+    console.log('The server is connected to MongoDB database')
   }
 )
 
@@ -57,7 +58,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 // the home route
-
+/*
 app.get('/', (req, res) => {
   res.render('pages/index')
 })
@@ -159,7 +160,8 @@ app.get('/api/v.1.0/students/:id/delete', (req, res) => {
     res.redirect('/students')
   })
 })
-
+*/
+app.use('/', Router)
 // listen port
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}...`)
