@@ -2,18 +2,41 @@
 
 <body>
   <div class="wrapper">
-    <%- include('../partials/navbar') %>
+    <header>
+      <div class="header-wrapper">
+        <%- include('../partials/navbar') %>
+        <h3 class="page-title">Express Web Application</h3>
+      </div>
+    </header>
+
     <main>
       <div class="main-wrapper">
-        <h3 class="page-title">Home sweet home</h3>
+
         <div class="web-techs">
-          <img src="/assets/images/html_logo.webp" alt="HTML Logo" />
-          <img src="/assets/images/css_logo.png" alt="HTML Logo" />
-          <img src="/assets/images/js_logo.png" alt="HTML Logo" />
+          <div class="web-techs__view">
+            <section>
+              <h4 class="web_techs__title">Front End Technologies</h3>
+                <article class="web-tech__images">
+                  <img src="images/html_logo.png" alt="HTML Logo" />
+                  <img src="images/css_logo.png" alt="HTML Logo" />
+                  <img src="images/js_logo.png" alt="HTML Logo" />
+                  <img src="images/ejs_logo.png" alt="HTML Logo" />
+                </article>
 
+            </section>
+          </div>
+          <div class="web-techs__server">
+            <section>
+              <h4 class="web_techs__title">Backend Technologies</h4>
+              <article class="web-tech__images">
+                <img src="images/mongodb.png" alt="HTML Logo" />
+                <img src="images/mongoose.png" alt="HTML Logo" />
+                <img src="images/node_logo.png" alt="HTML Logo" />
+              </article>
+            </section>
+
+          </div>
         </div>
-
-
       </div>
 
     </main>

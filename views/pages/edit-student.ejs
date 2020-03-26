@@ -1,12 +1,18 @@
 <%- include('../partials/head') %>
 
 <body>
-  <%- include('../partials/navbar') %>
+
   <div class="wrapper">
+    <header>
+      <div class="header-wrapper">
+        <%- include('../partials/navbar') %>
+        <h3 class="page-title">Edit student</h3>
+      </div>
+    </header>
     <main>
       <div class="main-wrapper">
         <form action="/api/v.1.0/students/<%= student._id %>/edit" method="POST">
-          <h3 class="form-title">Edit Student</h3>
+
           <div class="form-group">
             <label for="firstName">First Name</label>
             <input
@@ -66,9 +72,9 @@
       </div>
     </main>
 
-
+    <%- include('../partials/footer') %>
   </div>
-  <%- include('../partials/footer') %>
+
 </body>
 
 </html>
